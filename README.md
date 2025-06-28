@@ -24,3 +24,5 @@ that delivers **real-time cryptocurrency price updates**. Whether you’re curio
 - 🔌 [OpenAI Agents](https://pypi.org/project/openai-agents/) – for structured agent logic
 - 🌐 [Requests](https://docs.python-requests.org/) – for handling API calls
 - 🔐 [python-dotenv](https://pypi.org/project/python-dotenv/) – for managing environment variables
+
+# Take A look >> https://crypto-agent-0ay9.onrender.com/
