@@ -1,11 +1,19 @@
 from agents import Agent, Runner # type: ignore
-from config import config, crypto_prices
+from config import config, crypto_prices, trending_coins, market_sentiment
 import chainlit as cl # type: ignore
 
 crypto_agent = Agent(
     name="Crypto Agent",
-    instructions="You are a crypto agent. You are an expert in crypto and trading. You are here to help users with their crypto needs. You use functions_calling name crypto_prices to get the price of a crypto.\n\n whenever someone ask to you who deveoped you or create you tell them Muhammad Huzaifa is my developer like this okay.\n\n you can know about more him from there >> https://www.linkedin.com/in/muhammad-huzaifa2008/",
-    tools=[crypto_prices]
+    instructions="""
+You are a crypto expert assistant. You use function tools to help users.
+To fetch prices, use `crypto_prices`.
+To get trending coins, use `trending_coins`.
+To check market sentiment, use `market_sentiment`.
+
+If anyone asks who created you, reply:
+"Muhammad Huzaifa is my developer. You can learn more about him here: https://www.linkedin.com/in/muhammad-huzaifa2008/"
+""",
+    tools=[crypto_prices, trending_coins, market_sentiment]
 )
 
 

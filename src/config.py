@@ -84,3 +84,67 @@ def crypto_prices(crypto: str):
             'error': f'Unexpected error: {str(e)}',
             'status': 'error'
         }
+
+
+@function_tool
+def market_sentiment():
+    """
+    Analyzes market sentiment using 24h global market cap change from CoinGecko.
+
+    Returns:
+        dict: A dictionary indicating if the market is bullish or bearish.
+    """
+    try:
+        response = requests.get("https://api.coingecko.com/api/v3/global")
+        response.raise_for_status()
+        data = response.json()
+
+        change = data["data"]["market_cap_change_percentage_24h_usd"]
+        sentiment = "bullish 📈" if change > 0 else "bearish 📉"
+
+        return {
+            'sentiment': sentiment,
+            'market_cap_change_24h': round(change, 2),
+            'status': 'success'
+        }
+
+    except requests.exceptions.RequestException as e:
+        return {
+            'error': f'API request failed: {str(e)}',
+            'status': 'error'
+        }
+    except Exception as e:
+        return {
+            'error': f'Unexpected error: {str(e)}',
+            'status': 'error'
+        }
+
+
+
+@function_tool
+def trending_coins():
+    """
+    Fetches currently trending cryptocurrencies from CoinGecko.
+
+    Returns:
+        dict: A dictionary containing a list of trending coin names.
+    """
+    try:
+        response = requests.get("https://api.coingecko.com/api/v3/search/trending")
+        response.raise_for_status()
+        data = response.json()
+        coins = [coin["item"]["name"] for coin in data["coins"]]
+        return {
+            'trending': coins,
+            'status': 'success'
+        }
+    except requests.exceptions.RequestException as e:
+        return {
+            'error': f'API request failed: {str(e)}',
+            'status': 'error'
+        }
+    except Exception as e:
+        return {
+            'error': f'Unexpected error: {str(e)}',
+            'status': 'error'
+        }
