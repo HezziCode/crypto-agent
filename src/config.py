@@ -1,4 +1,4 @@
-from agents import AsyncOpenAI, OpenAIChatCompletionsModel, function_tool, RunConfig 
+from agents import AsyncOpenAI, OpenAIChatCompletionsModel, function_tool, RunConfig
 from dotenv import load_dotenv
 import os
 import requests
@@ -6,18 +6,17 @@ import requests
 
 load_dotenv()
 
-gemini_api_key = os.getenv("GEMINI_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
-if not gemini_api_key:
-    raise ValueError("GEMINI_API_KEY is not set")
+if not openai_api_key:
+    raise ValueError("OPENAI_API_KEY is not set")
 
 client = AsyncOpenAI(
-    api_key=gemini_api_key,
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+    api_key=openai_api_key
 )
 
 model = OpenAIChatCompletionsModel(
-    model="gemini-2.0-flash",
+    model="gpt-4o-mini",
     openai_client=client
 
 )
