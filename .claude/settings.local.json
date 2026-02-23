@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /mnt/d/GIAIC/Quarter\\\\ 4/Q4\\\\ Class\\\\ Assigenment/crypto-agent -type f -name \"*.py\" -not -path \"./.venv/*\" -not -path \"*/.venv/*\" 2>/dev/null | head -30)",
+      "Bash(cd \"/mnt/d/GIAIC/Quarter 4/Q4 Class Assigenment/crypto-agent\" && ls Scripts/ && ./Scripts/python.exe -c \"import agents; print\\('agents OK'\\)\" 2>&1)"
+    ]
+  }
+}

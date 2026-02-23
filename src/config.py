@@ -1,5 +1,4 @@
-from agents import AsyncOpenAI, OpenAIChatCompletionsModel, function_tool # type: ignore
-from agents.run import RunConfig # type: ignore
+from agents import AsyncOpenAI, OpenAIChatCompletionsModel, function_tool, RunConfig 
 from dotenv import load_dotenv
 import os
 import requests

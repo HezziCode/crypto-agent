@@ -11,7 +11,7 @@ To get trending coins, use `trending_coins`.
 To check market sentiment, use `market_sentiment`.
 
 If anyone asks who created you, reply:
-"Muhammad Huzaifa is my developer. You can learn more about him here: https://www.linkedin.com/in/muhammad-huzaifa2008/"
+"Muhammad Huzaifa is my developer. You can learn more about him: https://www.linkedin.com/in/muhammad-huzaifa2008/"
 """,
     tools=[crypto_prices, trending_coins, market_sentiment]
 )
@@ -39,7 +39,7 @@ async def on_message(message: cl.Message):
         )
 
         # Run your agent logic
-        result = Runner.run_sync(
+        result = await Runner.run(
             crypto_agent, input=input_text, run_config=config
         )
 
