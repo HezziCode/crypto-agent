@@ -7,9 +7,12 @@ import requests
 load_dotenv()
 
 openai_api_key = os.getenv("OPENAI_API_KEY")
+crypto_api_key = os.getenv("CRYPTO_API_KEY")
 
 if not openai_api_key:
     raise ValueError("OPENAI_API_KEY is not set")
+
+CG_HEADERS = {"x-cg-demo-api-key": crypto_api_key} if crypto_api_key else {}
 
 client = AsyncOpenAI(
     api_key=openai_api_key
@@ -44,14 +47,14 @@ def crypto_prices(crypto: str):
     """
    
     try:
-        # CoinGecko free API - no API key required
+        # CoinGecko API - using API key if available
         url = f"https://api.coingecko.com/api/v3/simple/price"
         params = {
             'ids': crypto.lower(),
             'vs_currencies': 'usd'
         }
 
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, headers=CG_HEADERS)
         response.raise_for_status()
 
         data = response.json()
@@ -93,7 +96,7 @@ def market_sentiment():
         dict: A dictionary indicating if the market is bullish or bearish.
     """
     try:
-        response = requests.get("https://api.coingecko.com/api/v3/global")
+        response = requests.get("https://api.coingecko.com/api/v3/global", headers=CG_HEADERS)
         response.raise_for_status()
         data = response.json()
 
@@ -128,7 +131,7 @@ def trending_coins():
         dict: A dictionary containing a list of trending coin names.
     """
     try:
-        response = requests.get("https://api.coingecko.com/api/v3/search/trending")
+        response = requests.get("https://api.coingecko.com/api/v3/search/trending", headers=CG_HEADERS)
         response.raise_for_status()
         data = response.json()
         coins = [coin["item"]["name"] for coin in data["coins"]]
